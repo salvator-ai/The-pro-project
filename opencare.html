@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Care Advanced</title>
+<style>
+:root{--dark:#1e2d2f;--green:#8fd694;--mint:#dff6e3;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:var(--mint);color:var(--dark)}
+nav{background:var(--dark);padding:15px;display:flex;justify-content:space-between}
+nav a{color:var(--white);text-decoration:none;margin:10px;font-weight:bold}
+section{display:none;padding:40px;min-height:100vh}
+.active{display:block}
+.card{background:var(--white);padding:30px;border-radius:20px;box-shadow:0 8px 25px rgba(0,0,0,.15);margin:20px auto;max-width:800px}
+button{background:var(--green);padding:12px 20px;border:none;border-radius:10px;cursor:pointer;font-weight:bold}
+input,textarea,select{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc}
+.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.feature{background:var(--mint);padding:20px;border-radius:15px}
+</style>
+</head>
+<body>
+<nav id='navbar' style='display:none'>
+<div><b>Open Care</b></div>
+<div>
+<a href='#' onclick="showPage('home')">Home</a>
+<a href='#' onclick="showPage('service')">Service</a>
+<a href='#' onclick="showPage('health')">Health Tips</a>
+<a href='#' onclick="showPage('contact')">Contact</a>
+</div>
+</nav>
+
+<section id='signin' class='active'>
+<div class='card'>
+<h1>Welcome to Open Care</h1>
+<p>Sign in to access your health dashboard.</p>
+<input type='email' id='email' placeholder='Email'>
+<input type='password' id='pass' placeholder='Password'>
+<button onclick='login()'>Sign In</button>
+<p id='loginMsg'></p>
+</div>
+</section>
+
+<section id='home'>
+<div class='card'>
+<h1>Patient Dashboard</h1>
+<p>Open Care helps monitor symptoms, provide guidance, connect patients with support, and promote healthy living.</p>
+<div class='dashboard'>
+<div class='feature'>Daily Health Check</div>
+<div class='feature'>Medicine Reminders</div>
+<div class='feature'>Emergency Contacts</div>
+<div class='feature'>Progress Tracking</div>
+</div>
+</div>
+</section>
+
+<section id='service'><div class='card'><h2>Symptom Checker</h2><p id='question'>Do you have fever?</p><button onclick='answer(true)'>Yes</button><button onclick='answer(false)'>No</button><p id='result'></p></div></section>
+
+<section id='health'><div class='card'><h2>Health Tips</h2><ul><li>Drink enough water daily</li><li>Sleep at least 8 hours</li><li>Exercise regularly</li><li>Eat fruits and vegetables</li><li>Visit a doctor for persistent symptoms</li></ul></div></section>
+
+<section id='contact'><div class='card'><h2>Contact</h2><p>Email: mucunguzikellysalvator@gmail.com</p><p>Phone: 0723615912</p><textarea placeholder='Comments'></textarea><button>Submit</button></div></section>
+
+<script>
+function login(){let e=document.getElementById('email').value,p=document.getElementById('pass').value;if(e&&p){document.getElementById('signin').classList.remove('active');document.getElementById('navbar').style.display='flex';showPage('home')}else{document.getElementById('loginMsg').innerText='Enter email and password';}}
+function showPage(id){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+const q=['Do you have fever?','Do you cough?','Headache?','Tiredness?','Dizziness?'];let i=0,y=0;function answer(a){if(a)y++;i++;if(i<q.length){question.innerText=q[i]}else{result.innerText=y>=3?'Please consult a doctor soon.':'Keep monitoring your health.';}}
+</script>
+</body>
+</html>
